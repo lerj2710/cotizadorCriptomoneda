@@ -1,4 +1,4 @@
-import {criptomonedasSelect} from './selectores.js';
+import {criptomonedasSelect, formulario} from './selectores.js';
 
 const objBusqueda ={
     moneda: '',
@@ -39,6 +39,22 @@ export function submitFormulario(e){
     const { moneda, criptomoneda} = objBusqueda;
 
     if (moneda === ''|| criptomoneda === '') {
-        console.log('Ambos campos son obligatorios');
+        mostrarAlerta('Ambos campos son obligatorios');
     }
+};
+
+function mostrarAlerta(msg) {
+    const existeError = document.querySelector('.error');
+    if (!existeError) {
+        
+        const divMensaje = document.createElement('div');
+        divMensaje.classList.add('error');
+        divMensaje.textContent = msg;
+        formulario.appendChild(divMensaje);
+        setTimeout(()=>{
+            divMensaje.remove();
+        },3000);
+    }
+
+
 }
