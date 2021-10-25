@@ -1,5 +1,10 @@
 import {criptomonedasSelect} from './selectores.js';
 
+const objBusqueda ={
+    moneda: '',
+    criptomoneda: ''
+};
+
 const objetenerCriptomoneda= criptomonedas=> new Promise( resolve =>{
     resolve(criptomonedas);
 });
@@ -22,3 +27,18 @@ const slectCriptomoneda = criptomonedas =>{
         criptomonedasSelect.appendChild(option);
     });
 };
+export function leerValor(e) {
+    objBusqueda[e.target.name] = e.target.value;
+    console.log(objBusqueda);
+}
+export function submitFormulario(e){
+    e.preventDefault();
+
+    //validar moneda
+
+    const { moneda, criptomoneda} = objBusqueda;
+
+    if (moneda === ''|| criptomoneda === '') {
+        console.log('Ambos campos son obligatorios');
+    }
+}
