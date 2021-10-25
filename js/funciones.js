@@ -1,4 +1,4 @@
-import {criptomonedasSelect, formulario} from './selectores.js';
+import {criptomonedasSelect, formulario, resultado} from './selectores.js';
 
 const objBusqueda ={
     moneda: '',
@@ -73,5 +73,32 @@ const consultarAPI = ()=>{
 };
 
 function mostarCotizacion(cotizacion) {
-    console.log(cotizacion);
+    limpiarHtnl();
+   const {PRICE,LOWDAY,CHANGEPCT24HOUR,LASTUPDATE,HIGHDAY}=cotizacion;
+   const precio = document.createElement('p');
+            precio.classList.add('precio');
+            precio.innerHTML = `El precio es:<span>${PRICE}</span>`;
+            
+   const precioAlto = document.createElement('p');
+         precioAlto.innerHTML=`El precio mas alto<span>${HIGHDAY}</span>`;
+   
+   const precioBajo = document.createElement('p');
+        precioBajo.innerHTML=`El precio mas bajo<span>${LOWDAY}</span>`;
+  
+   const precioHoras = document.createElement('p');
+         precioHoras.innerHTML=`ultimas horas 24 horas<span>${CHANGEPCT24HOUR}</span>`;
+       
+   const precioAcualizacion = document.createElement('p');
+         precioAcualizacion.innerHTML=`ultima actualización <span>${LASTUPDATE}</span>`;
+
+   resultado.appendChild(precio);
+   resultado.appendChild(precioAlto);
+   resultado.appendChild(precioBajo);
+   resultado.appendChild(precioHoras);
+   resultado.appendChild(precioAcualizacion);
+};
+function limpiarHtnl() {
+    while (resultado.firstChild) {
+        resultado.removeChild(resultado.firstChild);
+    }
 }
